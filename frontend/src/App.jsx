@@ -8,6 +8,8 @@ import {
 } from "react-icons/fa";
 import "./App.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [url, setUrl] = useState("");
   const [video, setVideo] = useState(null);
@@ -22,7 +24,7 @@ function App() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/video-info",
+        `${API_URL}/video-info`,
         {
           url,
         }
@@ -70,7 +72,7 @@ function App() {
             {video.formats.map((item, index) => (
               <a
                 key={index}
-                href={`http://localhost:5000/download?url=${encodeURIComponent(
+                href={`${API_URL}/download?url=${encodeURIComponent(
                   url
                 )}&formatId=${item.formatId}`}
                 target="_blank"
@@ -82,7 +84,7 @@ function App() {
           </div>
 
           <a
-            href={`http://localhost:5000/mp3?url=${encodeURIComponent(
+            href={`${API_URL}/mp3?url=${encodeURIComponent(
               url
             )}`}
             target="_blank"
