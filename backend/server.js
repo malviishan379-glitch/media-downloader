@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const ytDlp = require("yt-dlp-exec");
+const ytDlpPath = require("yt-dlp-exec").path;
 const fs = require("fs");
 const path = require("path");
 const ffmpeg = require("ffmpeg-static");
@@ -26,6 +27,7 @@ app.post("/video-info", async (req, res) => {
     }
 
     const info = await ytDlp(url, {
+      executablePath: ytDlpPath,
       dumpSingleJson: true,
       noWarnings: true,
       preferFreeFormats: true,
@@ -51,6 +53,7 @@ app.post("/video-info", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to fetch video info",
+      error: error.message,
     });
   }
 });
@@ -72,6 +75,7 @@ app.get("/download", async (req, res) => {
     );
 
     await ytDlp(url, {
+      executablePath: ytDlpPath,
       output: outputPath,
       format: formatId || "bestvideo+bestaudio/best",
       mergeOutputFormat: "mp4",
@@ -106,6 +110,7 @@ app.get("/mp3", async (req, res) => {
     );
 
     await ytDlp(url, {
+      executablePath: ytDlpPath,
       extractAudio: true,
       audioFormat: "mp3",
       ffmpegLocation: ffmpeg,
