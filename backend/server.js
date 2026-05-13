@@ -79,7 +79,9 @@ app.get("/download", async (req, res) => {
     });
 
     res.download(outputPath, () => {
-      fs.unlinkSync(outputPath);
+      if (fs.existsSync(outputPath)) {
+        fs.unlinkSync(outputPath);
+      }
     });
   } catch (error) {
     console.log(error);
@@ -111,7 +113,9 @@ app.get("/mp3", async (req, res) => {
     });
 
     res.download(outputPath, () => {
-      fs.unlinkSync(outputPath);
+      if (fs.existsSync(outputPath)) {
+        fs.unlinkSync(outputPath);
+      }
     });
   } catch (error) {
     console.log(error);
@@ -119,7 +123,7 @@ app.get("/mp3", async (req, res) => {
   }
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
