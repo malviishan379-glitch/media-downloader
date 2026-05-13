@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #020617;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 850px;
+  margin: auto;
+  padding: 40px 20px;
+  text-align: center;
+  color: white;
+}
+
+h1 {
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-bottom: 30px;
+}
+
+.inputBox {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+input {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+button {
+  padding: 16px 25px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card {
+  background: #0f172a;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.card h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.formats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.formats a,
+.mp3 {
+  text-decoration: none;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.formats a {
+  background: #16a34a;
+}
+
+.mp3 {
+  background: #dc2626;
+  width: fit-content;
+  margin: 25px auto 0;
+}
+
+@media (max-width: 700px) {
+  .inputBox {
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+}
