@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const ytDlp = require("yt-dlp-exec");
-const ytDlpPath = require("yt-dlp-exec").path;
+const youtubedl = require("youtube-dl-exec");
 const fs = require("fs");
 const path = require("path");
 const ffmpeg = require("ffmpeg-static");
@@ -26,8 +25,7 @@ app.post("/video-info", async (req, res) => {
       });
     }
 
-    const info = await ytDlp(url, {
-      executablePath: ytDlpPath,
+    const info = await youtubedl(url, {
       dumpSingleJson: true,
       noWarnings: true,
       preferFreeFormats: true,
@@ -47,6 +45,7 @@ app.post("/video-info", async (req, res) => {
       thumbnail: info.thumbnail,
       formats: uniqueFormats,
     });
+
   } catch (error) {
     console.log(error);
 
@@ -74,8 +73,7 @@ app.get("/download", async (req, res) => {
       fileName
     );
 
-    await ytDlp(url, {
-      executablePath: ytDlpPath,
+    await youtubedl(url, {
       output: outputPath,
       format: formatId || "bestvideo+bestaudio/best",
       mergeOutputFormat: "mp4",
@@ -87,6 +85,7 @@ app.get("/download", async (req, res) => {
         fs.unlinkSync(outputPath);
       }
     });
+
   } catch (error) {
     console.log(error);
     res.status(500).send("Download failed");
@@ -109,8 +108,7 @@ app.get("/mp3", async (req, res) => {
       fileName
     );
 
-    await ytDlp(url, {
-      executablePath: ytDlpPath,
+    await youtubedl(url, {
       extractAudio: true,
       audioFormat: "mp3",
       ffmpegLocation: ffmpeg,
@@ -122,6 +120,7 @@ app.get("/mp3", async (req, res) => {
         fs.unlinkSync(outputPath);
       }
     });
+
   } catch (error) {
     console.log(error);
     res.status(500).send("MP3 download failed");
